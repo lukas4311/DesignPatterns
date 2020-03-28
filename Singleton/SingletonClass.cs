@@ -1,18 +1,18 @@
-﻿namespace Singleton
+﻿using System;
+using System.Threading;
+
+namespace Singleton
 {
     public class SingletonClass
     {
-        private static SingletonClass instance;
+        private static Lazy<SingletonClass> instance = new Lazy<SingletonClass>(() => new SingletonClass(), LazyThreadSafetyMode.ExecutionAndPublication);
 
         private SingletonClass()
         {}
 
         public static SingletonClass GetInstance()
         {
-            if (instance == null)
-                instance = new SingletonClass();
-
-            return instance;
+            return instance.Value;
         }
     }
 }
