@@ -6,7 +6,11 @@ namespace Singleton
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Test singleton.");
+            SingletonClass singletonInstance = SingletonClass.GetInstance();
+            SingletonClass sameSingletonIntance = SingletonClass.GetInstance();
+
+            Console.WriteLine(singletonInstance.Equals(sameSingletonIntance));
         }
     }
 }
