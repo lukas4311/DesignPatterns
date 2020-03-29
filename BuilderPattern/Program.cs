@@ -6,7 +6,12 @@ namespace BuilderPattern
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            CarBuilder builder = new CarBuilder();
+            Director director = new Director(builder);
+
+            director.BuildLowCostCar();
+            Car newCar = builder.GetCar();
+            Console.WriteLine(newCar.GetCarConfiguration());
         }
     }
 }
