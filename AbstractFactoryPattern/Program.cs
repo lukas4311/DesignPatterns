@@ -29,10 +29,10 @@ namespace AbstractFactoryPattern
     {
         private ICarFactory vehicleFactory = null;
 
-        public Dictionary<string, Func<ICarFactory>> FactoryDictionaryOfFactoryTypes { get; set; } = new Dictionary<string, Func<ICarFactory>>
+        private Dictionary<string, ICarFactory> FactoryDictionaryOfFactoryTypes { get; set; } = new Dictionary<string, ICarFactory>
         {
-            { "toyota", () => new ToyotaFactory()},
-            { "bmw", () => new BMWFactory()}
+            { "toyota", new ToyotaFactory()},
+            { "bmw", new BMWFactory()}
         };
 
         public bool IsKnownCreateProcessOfCarType(string carType)
@@ -42,15 +42,7 @@ namespace AbstractFactoryPattern
 
         public void CreateCar(string carName)
         {
-            if (string.Equals(carName, "toyota", StringComparison.OrdinalIgnoreCase))
-            {
-                vehicleFactory = new ToyotaFactory();
-            }
-            else if (string.Equals(carName, "bmw", StringComparison.OrdinalIgnoreCase))
-            {
-                vehicleFactory = new BMWFactory();
-            }
-
+            vehicleFactory = this.FactoryDictionaryOfFactoryTypes.Single(k => string.Equals(carName, k.Key, StringComparison.OrdinalIgnoreCase)).Value;
             Console.Write($"{carName} uses {vehicleFactory.GetCarEngine().GetEngineSpecification()} with {vehicleFactory.GetCarHood().GetHoodMaterial()} as headlight");
         }
     }
