@@ -1,15 +1,20 @@
-internal class OrderDecorator : OrderBase
+using System;
+
+namespace DecoratorPattern
 {
-    protected OrderBase order;
-
-    public OrderDecorator(OrderBase order)
+    internal class OrderDecorator : OrderBase
     {
-        this.order = order;
-    }
+        protected OrderBase order;
 
-    public override double CalculateTotalOrderPrice()
-    {
-        Console.WriteLine($"Calculating the total price in a decorator class");
-        return order.CalculateTotalOrderPrice();
-    }
+        public OrderDecorator(OrderBase order)
+        {
+            this.order = order;
+        }
+
+        public override double CalculateTotalOrderPrice()
+        {
+            Console.WriteLine($"Calculating the total price in a decorator class");
+            return order.CalculateTotalOrderPrice();
+        }
+    } 
 }
