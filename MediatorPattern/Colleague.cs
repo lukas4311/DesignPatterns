@@ -4,7 +4,7 @@
     {
         protected Mediator Mediator;
 
-        public Colleague(Mediator mediator)
+        internal void RegisterMediator(Mediator mediator)
         {
             this.Mediator = mediator;
         }

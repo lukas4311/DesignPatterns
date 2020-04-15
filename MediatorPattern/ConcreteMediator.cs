@@ -1,21 +1,29 @@
-﻿namespace MediatorPattern
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace MediatorPattern
 {
     public class ConcreteMediator : Mediator
     {
-        public ColleagueLuke ColleagueLuke;
-
-        public ColleagueTom ColleagueTom;
+        public List<Colleague> Colleagues = new List<Colleague>();
 
         public override void Send(string message, Colleague colleague)
         {
-            if (colleague == this.ColleagueLuke)
-            {
-                this.ColleagueTom.HandleNotification(message);
-            }
-            else if (colleague == ColleagueTom)
-            {
-                this.ColleagueLuke.HandleNotification(message);
-            }
+            this.Colleagues.Where(c => c != colleague).ToList().ForEach(c => c.HandleNotification(message));
+        }
+
+        public T CreateColleague<T>() where T: Colleague, new()
+        {
+            T colleague = new T();
+            colleague.RegisterMediator(this);
+            this.Colleagues.Add(colleague);
+            return colleague;
+        }
+
+        public void Register(Colleague colleague)
+        {
+            colleague.RegisterMediator(this);
+            this.Colleagues.Add(colleague);
         }
     }
 }
