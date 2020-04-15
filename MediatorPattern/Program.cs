@@ -6,7 +6,13 @@ namespace MediatorPattern
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ConcreteMediator concreteMediator = new ConcreteMediator();
+            ColleagueLuke colleagueLuke = new ColleagueLuke(concreteMediator);
+            ColleagueTom colleagueTom = new ColleagueTom(concreteMediator);
+            concreteMediator.ColleagueLuke = colleagueLuke;
+            concreteMediator.ColleagueTom = colleagueTom;
+
+            colleagueLuke.Send("Ahoj Tome, tady Luke");
         }
     }
 }
