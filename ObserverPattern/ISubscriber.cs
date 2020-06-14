@@ -1,6 +1,6 @@
 ﻿namespace ObserverPattern
 {
-    public interface ISubscriber<T>
+    internal interface ISubscriber<T>
     {
         void Update(T data);
     }

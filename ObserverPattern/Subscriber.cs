@@ -2,7 +2,7 @@
 
 namespace ObserverPattern
 {
-    public class Subscriber : ISubscriber<object>
+    internal class Subscriber : ISubscriber<object>
     {
         public void Update(object data)
         {
