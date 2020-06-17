@@ -2,7 +2,7 @@
 
 namespace StrategyPattern
 {
-    public class RoadStrategy
+    public class RoadStrategy : IStrategy
     {
         public GeoCoordinate[] FindShortestPath(GeoCoordinate source, GeoCoordinate target)
         {
